@@ -32,7 +32,7 @@ function App() {
         <input 
         type="text"
         className="search"
-        placeholder="Search ..."
+        placeholder="Search City"
         value={city}
         onChange={(e) => {setCity(e.target.value)}}
         onKeyPress={search} 
