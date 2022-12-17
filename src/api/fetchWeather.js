@@ -1,14 +1,15 @@
 import axios from "axios";
-const API_KEY = '63e885ce13mshb34362e83ecc19cp11bdb1jsnf7620e5132a1'
-const LocationURL = 'https://find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com/iplocation'
-const WeatherURL = 'https://community-open-weather-map.p.rapidapi.com/weather'
-const IPLocationApiKey = '873dbe322aea47f89dcf729dcc8f60e8'
+const LocationURL = process.env.REACT_APP_Location_URL
+const IPLocationApiKey = process.env.REACT_APP_IP_Location_Api_Key
+const WeatherURL = process.env.REACT_APP_Weather_URL
+const WeatherAPIKEY = process.env.REACT_APP_Weather_API_KEY
+const xRapidApiKey = process.env.REACT_APP_Xrapid_Api_Key
 
 const LocationOptions = {
   params: {apikey: IPLocationApiKey},
   headers: {
     'X-RapidAPI-Host': 'find-any-ip-address-or-domain-location-world-wide.p.rapidapi.com',
-    'X-RapidAPI-Key': API_KEY
+    'X-RapidAPI-Key': xRapidApiKey
   }
 };
 
@@ -24,13 +25,10 @@ export const fetchWeather = async (query) => {
   const weatherOptions = {
     params: {
       q: query,
+      mode: 'JSON',
+      appid: WeatherAPIKEY,
       units: 'metric',
-      mode: 'JSON'
     },
-    headers: {
-      'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',
-      'X-RapidAPI-Key': API_KEY
-    }
   };
   const { data } = await axios.get(WeatherURL, weatherOptions)
     return data;

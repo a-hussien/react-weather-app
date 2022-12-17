@@ -9,16 +9,27 @@ function App() {
 
   const initLocation = async () => {
     const city = await fetchLocation()
-    const data = await fetchWeather(city)
+    if(city){
+      const data = await fetchWeather(city)
       setWeather(data)
+      setCity(city)
+    }
+    else{
       setCity('')
+    }
+    
   }
 
   const search = async (e) => {
     if(e.key === 'Enter') {
-      const data = await fetchWeather(city)
-      setWeather(data)
-      setCity('')
+      if(city) {
+        const data = await fetchWeather(city)
+        setWeather(data)
+        setCity(city)
+      }else{
+        setCity('')
+      }
+      
     }
   }
 
@@ -35,7 +46,7 @@ function App() {
         placeholder="Search City"
         value={city}
         onChange={(e) => {setCity(e.target.value)}}
-        onKeyPress={search} 
+        onKeyDown={search} 
         />
 
       {
